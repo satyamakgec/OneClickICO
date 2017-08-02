@@ -1,0 +1,12 @@
+{
+  "name": "oneclickico",
+  "version": "0.1.0",
+  "description": "ico",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "author": "rov van dam",
+  "license": "ISC"
+}

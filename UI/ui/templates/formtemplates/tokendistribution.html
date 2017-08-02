@@ -1,0 +1,24 @@
+
+<div>
+  
+  <form>
+    <h4>Token Distribution</h4>
+     
+        <label for="developers">Developers</label> 
+        <input type="number"  name="tokenName" id="tokenName" placeholder="Developers Share %" ng-model="formData.tokenName" required>
+        <label for="symbol"> Market Makers</label> 
+        <input type="number"  id="symbol" placeholder="Market Makers Share %" ng-model="formData.symbol" required>
+     
+        <label for="initialSupply"> Future Stakeholders</label> 
+        <input type="number"id="initialSupply" placeholder="Future Stakeholders Share %" ng-model="formData.initialSupply" required>
+        <label for="decimal"> Founders</label> 
+        <input type="number" id="decimal" placeholder="Founders Share %" ng-model="formData.decimal" required>
+        <label for="decimal"> CrowdFunding</label> 
+        <input type="number"  id="decimal" placeholder="CrowdFunding Share %" ng-model="formData.decimal" required>
+        <button ng-click="ICONextClick()"  class="button button2" style = "width:100%">
+        Next 
+        </button>
+ 
+  </form>
+  
+</div>

@@ -1,0 +1,57 @@
+         
+ <div class="animated fadeIn"  >
+          <div class="form-group" >
+				<label for="campaignName">Campaign Name</label> 
+				<input type="text" class="form-control" name="campaignName" id="campaignName" placeholder="Enter your Campaign Name" ng-model="formData.campaignName" required>
+            
+			</div>
+			<div class="form-group">
+				<label for="fundingGoal">Funding Goal</label> 
+				<input type="number" class="form-control" id="fundingGoal" placeholder="Enter Funding Goal in ETH" ng-model="formData.fundingGoal" required>
+				
+			</div>
+			<div class="form-group">
+                 <label for="expiryDate">Expiry Date</label> 
+                <br>
+                <div class = "row"> 
+               
+                 <div class = "col-sm-11" style="padding-right:0">
+               <input type="text" class="form-control" ng-click = "goEvent();" placeholder = " Select date" ng-model="formData.closingDate"></input> 
+                </div>
+                 <div class = "col-sm-1" style="padding-left:0">
+                              
+               <button class="btn btn-primary  btn-group-justified" ng-click="goEvent();"> <i class="fa fa-calendar" style = "color:#fff" aria-hidden="true"></i></button>
+                </div>
+               
+
+               </div>
+              <div ng-show="datePicker">
+              <div style="display:inline-block; min-height:290px;"> 
+                         
+              <datepicker id= "expiryDate" ng-model="formData.closingDate" min-date="minDate" show-weeks="false" class="well well-sm" style = "background-color:#fff ;margin-bottom:0">             
+              </datepicker>
+            
+           </div>
+            </div>
+            </div>
+			
+
+            
+            <div class="form-group" >
+            <label for="address">Beneficiary Account Address</label> 
+            <select class="form-control" id="address" ng-model="formData.beneficiaryAccount" style="margin-bottom:10px;" ng-options="obj.value as obj.label for obj in accountsArray">
+              <option value="" selected="selected">Choose your account</option>
+            <input type="text" class="form-control"  id="address" ng-show="formData.beneficiaryAccount === null" placeholder="Enter Account Address" ng-model="formData.account" >
+            </select>  
+            </div>
+            <div class="space" ></div>
+            <p style = "color:red;" ng-show="!campaignDataValid">Invalid or empty fields.</p>
+            <div class="form-group row">
+            <center>
+            <button ng-click="campaignNextClick()" class="btn btn-block btn-primary" style = "width:200px">
+            Next 
+              </button>
+              </center>
+          
+            </div>
+ </div>

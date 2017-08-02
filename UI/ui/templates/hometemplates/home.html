@@ -1,0 +1,112 @@
+<div ng-init = "checkConnection()">
+
+	<div ng-show = "!checkWeb3">				
+	<div class="panel panel-danger">
+	<div class="panel-heading"><center>
+	<i class="fa fa-exclamation-circle fa-3x" aria-hidden="true"></i></center></div>
+	<div class="panel-body">Please login to your metamask wallet!</div>
+	</div>
+	</div>
+
+<div ng-show = "checkWeb3" >  
+<header class="main_h" style = "width:90%">
+
+    <div class="row">
+        <a class="logo" href="#">ICO</a>
+
+        <div class="mobile-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href=".sec01">Ongoing</a></li>
+                <li><a href=".sec02">Upcoming</a></li>
+                <li><a href=".sec03">Past</a></li>
+                <li><a href=".sec04">About Us</a></li>
+            </ul>
+        </nav>
+
+    </div> <!-- / row -->
+
+</header>
+
+<div class="banner">
+
+    <h1><span>Welcome to ICO Platform</span><br><button class="button button1" ng-click = "goToICOForm()">CREATE ICO</button></h1>
+
+    <!--<div class="mouse">
+        <span></span>
+    </div>-->
+
+</div>
+
+<div class="row content">
+    <h1 class="sec01" ng-init = "loadOngoingICOs()">Ongoing</h1>
+    <p>
+	<div class="panel panel-default" style = "border : none" ng-show = "!checkOngoingICOs">
+       <div class="panel-body">You have no ongoing ICO.</div>
+    </div>	
+	<table class="table table-condensed table-bordered" ng-show = "checkOngoingICOs">
+	<thead style = "background-color:#009999;color:#fff">
+		<tr>
+		<th>SNo</th>	
+		<th>Name</th>
+		<th>Symbol</th>
+		<th>Token Supply</th>
+		<th>Goal(ETH)</th>
+		<th>Amount Raised(ETH)</th>
+		<th>Progress</th>
+		<th>Days Left</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat = "OngoingICO in OngoingICOs" ng-click = "goToReviewPage(OngoingICO.id)" >
+		<td>{{$index + 1}}</td>	
+		<td>{{OngoingICO.name}}</td>
+		<td>{{OngoingICO.symbol}}</td>
+		<td>{{OngoingICO.tokenSupply}}</td>
+		<td>{{OngoingICO.goal}}</td>
+		<td>{{OngoingICO.status}}</td>
+		<td>
+		<div class="progress">
+		<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{((OngoingICO.status/OngoingICO.goal)*100)}}" ng-style="{width : ( ((OngoingICO.status /OngoingICO.goal)*100) + '%' ) }"  aria-valuemin="0" aria-valuemax="100" style="width:40%">
+		OngoingICO.status (success)
+		</div>
+		</div>
+		</td>
+		<td>{{OngoingICO.remainingDays}}</td>
+		</tr>
+
+	</tbody>
+	</table>
+	</p>
+    
+	<h1 class="sec02">Upcoming</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, recusandae, at, labore velit eligendi amet nobis repellat natus sequi sint consectetur excepturi doloribus vero provident consequuntur accusamus quisquam nesciunt cupiditate soluta alias illo et deleniti voluptates facilis repudiandae similique dolore quaerat architecto perspiciatis officiis dolor ullam expedita suscipit neque minima rem praesentium inventore ab officia quos dignissimos esse quam placeat iste porro eius! Minus, aspernatur nesciunt consectetur. Sit, eius, itaque, porro, beatae impedit officia tenetur reiciendis autem vitae a quae ipsam repudiandae odio dolorum quaerat asperiores possimus corporis optio animi quisquam laboriosam nihil quam voluptatum quidem veritatis iste culpa iure modi perspiciatis recusandae ipsa libero officiis aliquam doloremque similique id quasi atque distinctio enim sapiente ratione in quia eum perferendis earum blanditiis. Nobis, architecto, veniam molestias minus iste necessitatibus est ab in earum ratione eveniet soluta molestiae sed illo nostrum nemo debitis. Minus, quod totam aliquam ea asperiores fugit quaerat excepturi dolores ratione numquam consequatur id unde alias provident vero incidunt exercitationem similique consequuntur hic possimus? Fuga, eveniet quaerat inventore corporis laborum eligendi enim soluta obcaecati aliquid veritatis provident amet laudantium est quisquam dolore exercitationem modi? Distinctio, pariatur, ab velit praesentium vitae quidem consequatur deleniti recusandae odit officiis. Quidem, cupiditate.</p>
+    
+	<h1 class="sec03">Past</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, recusandae, at, labore velit eligendi amet nobis repellat natus sequi sint consectetur excepturi doloribus vero provident consequuntur accusamus quisquam nesciunt cupiditate soluta alias illo et deleniti voluptates facilis repudiandae similique dolore quaerat architecto perspiciatis officiis dolor ullam expedita suscipit neque minima rem praesentium inventore ab officia quos dignissimos esse quam placeat iste porro eius! Minus, aspernatur nesciunt consectetur. Sit, eius, itaque, porro, beatae impedit officia tenetur reiciendis autem vitae a quae ipsam repudiandae odio dolorum quaerat asperiores possimus corporis optio animi quisquam laboriosam nihil quam voluptatum quidem veritatis iste culpa iure modi perspiciatis recusandae ipsa libero officiis aliquam doloremque similique id quasi atque distinctio enim sapiente ratione in quia eum perferendis earum blanditiis. Nobis, architecto, veniam molestias minus iste necessitatibus est ab in earum ratione eveniet soluta molestiae sed illo nostrum nemo debitis. Minus, quod totam aliquam ea asperiores fugit quaerat excepturi dolores ratione numquam consequatur id unde alias provident vero incidunt exercitationem similique consequuntur hic possimus? Fuga, eveniet quaerat inventore corporis laborum eligendi enim soluta obcaecati aliquid veritatis provident amet laudantium est quisquam dolore exercitationem modi? Distinctio, pariatur, ab velit praesentium vitae quidem consequatur deleniti recusandae odit officiis. Quidem, cupiditate.</p>
+    
+	
+	<h1 class="sec04">About Us</h1>
+	<p>
+	We are a new age corporate brand. The business fraternity recognizes us as a core technology company with a strong DNA towards solution creation and innovation. Creating solutions for end users to enhance their business processes is our sole priority.
+
+	It has helped us to explore technology to its fullest business application. The capability to innovate continuously has kept us ahead of our competitors. It has supported us to adapt to ever-changing business parameters.
+
+	The deep-rooted and limitless technology heritage connects all our businesses through a common chord. For almost twenty five years our brand has helped all our stakeholders to foresee, steer and benefit from the change taking place in the industry.
+
+	During this period, we have been working with the main objective of being the frontier of specialized technologies which provide high value services to our customers. This has made us the top technology provider to global software product companies across a wide spectrum of industries.
+
+	Our product engineering services have become inevitable for the global players. These services suit the present day business specifications. Because of these innovative services we have clients from US, Canada and Europe.
+
+	With over 5000 person-years of experience and more than US$ 25 million of investment in developing software products, we promise to bring futuristic technologies that further push the boundary of technology innovation.
+		</p>
+	</div>
+	<div class="banner">
+	</div>
+	</div>
+	</div>

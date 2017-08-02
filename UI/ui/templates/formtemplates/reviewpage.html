@@ -1,0 +1,127 @@
+<div ng-init = "showICODetails()">
+<div class="banner2">
+    
+    <h1><span>{{icoDetails.name}}</span><br></h1>
+
+    <!--<div class="mouse">
+        <span></span>
+    </div>-->
+
+</div>
+
+<div>
+
+    <div class = "row" style = "margin:0;max-width:none">
+        <div class = "col-md-6" style = "padding-right:40px;padding-left:0">  
+<span style="display:inline"> 
+    
+    <h3 ><i class="fa fa-bars" aria-hidden="true" style = "padding-right:7px;color:#009999"></i>Overview</h3>
+    </span>  
+            <table  class="table table-condensed table-hover" style = "border:none; background-color:transparent;">
+                <tbody>
+                    <!--<tr class = "tr-style">
+                    <td class = "td-style">
+                    Name
+                    </td>
+                    <td style = "vertical-align: middle">
+                    {{icoDetails.name}}
+                    </td>    
+                    </tr> -->
+                    <tr  class = "tr-style">
+                    <td  class = "td-style">
+                    Symbol
+                    </td>
+                    <td style = "vertical-align: middle">
+                    {{icoDetails.symbol}}
+                    </td>    
+                    </tr> 
+                    <tr  class = "tr-style">
+                    <td  class = "td-style">
+                    Goal
+                    </td>
+                    <td style = "vertical-align: middle">
+                    {{icoDetails.goal}}
+                    </td>    
+                    </tr>
+                    <tr  class = "tr-style">
+                    <td  class = "td-style">
+                    InitialSupply
+                    </td>
+                    <td style = "vertical-align: middle">
+                    {{icoDetails.tokenSupply}}
+                    </td>    
+                    </tr> 
+                    <tr  class = "tr-style">
+                    <td  class = "td-style">
+                    Starting Date
+                    </td>
+                    <td style = "vertical-align: middle">
+                    {{icoDetails.startingDate}}
+                    </td>    
+                    </tr>
+                    <tr  class = "tr-style">
+                    <td  class = "td-style">
+                    Closing Date
+                    </td>
+                    <td style = "vertical-align: middle">
+                    {{icoDetails.closingDate}}
+                    </td>    
+                    </tr>      
+                </tbody>    
+            </table>
+        </div>
+        <div class = "col-md-6"  style = "padding-left :40px">
+            <span style="display:inline"> 
+    
+    <h3 ><i class="fa fa-pie-chart" aria-hidden="true" style = "padding-right:7px;color:#009999"></i>Distribution</h3>
+    </span> 
+         <table  class="table table-condensed table-hover" style = "border:none; background-color:transparent;">
+                <tbody>
+                    <tr class = "tr-style">
+                    <td class = "td-style">
+                    Developers
+                    </td>
+                    <td style = "vertical-align: middle">
+                    {{icoDetails.distribution.developers}}%
+                    </td>    
+                    </tr> 
+                    <tr class = "tr-style">
+                    <td class = "td-style">
+                    Founders
+                    </td>
+                    <td style = "vertical-align: middle">
+                    {{icoDetails.distribution.founders}}%
+                    </td>    
+                    </tr> 
+                    <tr class = "tr-style">
+                    <td class = "td-style">
+                    marketmakers
+                    </td>
+                    <td style = "vertical-align: middle">
+                    {{icoDetails.distribution.marketmakers}}%
+                    </td>    
+                    </tr> 
+                    <tr class = "tr-style">
+                    <td class = "td-style">
+                    future stakeholders
+                    </td>
+                    <td style = "vertical-align: middle">
+                    {{icoDetails.distribution.futurestakeholders}}%
+                    </td>    
+                    </tr>
+                    <tr class = "tr-style">
+                    <td class = "td-style">
+                    crowdfunding
+                    </td>
+                    <td style = "vertical-align: middle">
+                    {{icoDetails.distribution.crowdfunding}}%
+                    </td>    
+                    </tr>
+                    
+                </tbody>    
+            </table>
+        </div>      
+    </div>  
+   
+</div>    
+</div>
