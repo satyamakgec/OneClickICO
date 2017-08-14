@@ -77,12 +77,6 @@ function assignTokenToCrowdFund(address tokenAddr) notPlatform returns(bool){
    }
 }
 
-// function getTokenName(address tokenAddr) returns(string){
-    
-//      token = Token(tokenAddr);
-//      return token.tokenName();
-// }
-
 function getTokensCreatorListLength(address _creator) returns(uint256){
     return tokenCreators[_creator].length; 
 }
