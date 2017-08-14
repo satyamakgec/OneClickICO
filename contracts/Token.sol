@@ -2,20 +2,18 @@ pragma solidity ^0.4.11;
 
 import './helpers/Ownable.sol';
 import './lib/safeMath.sol';
+import './helpers/BasicToken.sol';
 
+contract Token is Ownable , BasicToken{
 
-contract Token is Ownable , BasicToken , TokenHandlers{
-
-   string public tokenName;
-   string public tokenSymbol;
+   bytes32 public tokenName ;
+   bytes32 public tokenSymbol ;
    uint8 public decimal;
-
    uint256 public initialSupply ;
-
    address public crowdFundAddress;
    
 
-   uint public tokenAllocatedToDevlepers ;
+   uint public tokenAllocatedToDevelopers ;
    uint public tokenAllocatedToFounders ;
    uint public tokenAllocatedToMarketMaker;
    uint public tokenAllocatedToFutureStakeHolers;
@@ -49,25 +47,32 @@ contract Token is Ownable , BasicToken , TokenHandlers{
    event  TokenAllocation(address indexed _to , uint _value);
    event  TokenAllocateToCrowdFund(uint _blockTimeStamp);
 
-    function Token ( uint _initialSupply , uint8 _decimal , string _tokenName , string _tokenSymbol ){
+    function Token ( uint _initialSupply , uint8 _decimal , bytes32 _tokenName , bytes32 _tokenSymbol ){
         owner = msg.sender;
         initialSupply = _initialSupply;
         decimal = _decimal;
         tokenName = _tokenName;
         tokenSymbol = _tokenSymbol;
     }
-
+    
+    function getTokenName() constant returns(bytes32){
+      return tokenName;    
+    }
+    function getTokenSymbol() constant returns(bytes32){
+        return tokenSymbol;
+    }
+    
     function setCrowdFundAddress(address _crowdFund) onlyOwner isCrowdFund nonZeroAddress(_crowdFund) external{  // call one Time
         crowdFundAddress = _crowdFund;
         isCrowdFundAddressSet = !isCrowdFundAddressSet;
     }
 
-    function assignTokenDistribution(uint _tokenAllocatedToDevlepers, uint _tokenAllocatedToFounders, uint _tokenAllocatedToMarketMaker,  uint _tokenAllocatedToFutureStakeHolers, uint _tokenAllocatedToCrowdFund)onlyOwner isTokenDistribution returns(bool){
-        uint totalTokens = _tokenAllocatedToCrowdFund + _tokenAllocatedToDevlepers + _tokenAllocatedToFounders + _tokenAllocatedToFutureStakeHolers + _tokenAllocatedToMarketMaker;
+    function setTokenDistribution(uint _tokenAllocatedToDevelopers, uint _tokenAllocatedToFounders, uint _tokenAllocatedToMarketMaker,  uint _tokenAllocatedToFutureStakeHolers, uint _tokenAllocatedToCrowdFund)onlyOwner isTokenDistribution returns(bool){
+        uint totalTokens = _tokenAllocatedToCrowdFund + _tokenAllocatedToDevelopers + _tokenAllocatedToFounders + _tokenAllocatedToFutureStakeHolers + _tokenAllocatedToMarketMaker;
         assert(totalTokens == 100);
-        tokenAllocatedToDevlepers = ((_tokenAllocatedToDevlepers).mul(initialSupply)).div(100);
+        tokenAllocatedToDevelopers = ((_tokenAllocatedToDevelopers).mul(initialSupply)).div(100);
         tokenAllocatedToFounders = ((_tokenAllocatedToFounders).mul(initialSupply)).div(100);
-        tokenAllocatedToMarketMaker = ((_tokenAllocatedToMarketMaker).mul(initialSupply).div(100);
+        tokenAllocatedToMarketMaker = ((_tokenAllocatedToMarketMaker).mul(initialSupply)).div(100);
         tokenAllocatedToFutureStakeHolers = ((_tokenAllocatedToFutureStakeHolers).mul(initialSupply)).div(100);
         tokenAllocatedToCrowdFund = ((_tokenAllocatedToCrowdFund).mul(initialSupply)).div(100);
         balances[owner] = tokenAllocatedToFounders;
@@ -76,10 +81,10 @@ contract Token is Ownable , BasicToken , TokenHandlers{
         return true;
     }
 
-    function allocateTokenTodevelopers(address _to , uint value) onlyOwner returns (bool){
-        if(tokenAllocatedToDevlepers >= value){
-            balances[_to] = balances[_to].add(value);
-            tokenAllocatedToDevlepers = tokenAllocatedToDevlepers.sub(value);
+    function allocateTokenToDevelopers(address _to , uint _value) onlyOwner returns (bool){
+        if(tokenAllocatedToDevelopers >= _value){
+            balances[_to] = balances[_to].add(_value);
+            tokenAllocatedToDevelopers = tokenAllocatedToDevelopers.sub(_value);
             TokenAllocation(_to , _value);
             return true;
         }else{
@@ -87,10 +92,10 @@ contract Token is Ownable , BasicToken , TokenHandlers{
         }
     }
 
-     function tokenAllocatedToFounders(address _to , uint value) onlyOwner returns (bool){
-        if(tokenAllocatedToFounders >= value){
-            balances[_to] = balances[_to].add(value);
-            tokenAllocatedToFounders = tokenAllocatedToFounders.sub(value);
+     function allocateTokenToFounders(address _to , uint _value) onlyOwner returns (bool){
+        if(tokenAllocatedToFounders >= _value){
+            balances[_to] = balances[_to].add(_value);
+            tokenAllocatedToFounders = tokenAllocatedToFounders.sub(_value);
             TokenAllocation(_to , _value);
             return true;
         }else{
@@ -98,10 +103,10 @@ contract Token is Ownable , BasicToken , TokenHandlers{
         }
     }
 
-     function tokenAllocatedToMarketMaker(address _to , uint value) onlyOwner returns (bool){
-        if(tokenAllocatedToMarketMaker >= value){
-            balances[_to] = balances[_to].add(value);
-            tokenAllocatedToMarketMaker = tokenAllocatedToMarketMaker.sub(value);
+     function allocateTokenToMarketMaker(address _to , uint _value) onlyOwner returns (bool){
+        if(tokenAllocatedToMarketMaker >= _value){
+            balances[_to] = balances[_to].add(_value);
+            tokenAllocatedToMarketMaker = tokenAllocatedToMarketMaker.sub(_value);
             TokenAllocation(_to , _value);
             return true;
         }else{
@@ -109,10 +114,10 @@ contract Token is Ownable , BasicToken , TokenHandlers{
         }
     }
 
-     function tokenAllocatedToFutureStakeHolers(address _to , uint value) onlyOwner returns (bool){
-        if(tokenAllocatedToFutureStakeHolers >= value){
-            balances[_to] = balances[_to].add(value);
-            tokenAllocatedToFutureStakeHolers = tokenAllocatedToFutureStakeHolers.sub(value);
+     function allocateTokenToFutureStakeHolers(address _to , uint _value) onlyOwner returns (bool){
+        if(tokenAllocatedToFutureStakeHolers >= _value){
+            balances[_to] = balances[_to].add(_value);
+            tokenAllocatedToFutureStakeHolers = tokenAllocatedToFutureStakeHolers.sub(_value);
             TokenAllocation(_to , _value);
             return true;
         }else{
@@ -120,7 +125,7 @@ contract Token is Ownable , BasicToken , TokenHandlers{
         }
     }
     
-    function tokenAllocatedToCrowdFund() onlyCrowdFund returns (bool){
+    function allocateTokenToCrowdFund() onlyCrowdFund returns (bool){
         if(!isTokenAllocatedToCrowdFund){
             balances[crowdFundAddress] = tokenAllocatedToCrowdFund;
             tokenAllocatedToCrowdFund = 0;
@@ -131,8 +136,5 @@ contract Token is Ownable , BasicToken , TokenHandlers{
         }
     }
     
-
-
-
 
 }

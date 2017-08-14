@@ -37,7 +37,6 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
-    "fs": "0.0.1-security",
-    "truffle-default-builder": "^2.0.0"
+    "fs": "0.0.1-security"
   }
 }

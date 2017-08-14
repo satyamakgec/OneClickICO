@@ -8,11 +8,9 @@ module.exports = {
     filename: 'server.js'
   },
   plugins: [
-
     // Copy our app's index.html to the build folder.
     new CopyWebpackPlugin([
-      { from: './app/UI/ui/index.html', to: "index.html" },
-      // { from : './app/UI/ui/stylesheets/app.css',to: 'app.css'}
+      { from: './app/UI/ui/index.html', to: "index.html" }
     ])
   ],
   module: {
@@ -36,9 +34,9 @@ module.exports = {
     ]
   },
   node: {
-    console: true,
+    console: 'empty',
     fs: 'empty',
     net: 'empty',
     tls: 'empty'
   }
-};
+}

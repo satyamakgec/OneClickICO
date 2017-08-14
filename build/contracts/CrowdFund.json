@@ -1,0 +1,346 @@
+{
+  "contract_name": "CrowdFund",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "startDate",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "minimumFundingGoal",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getState",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "tokenRate",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "tokenAmountRecord",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "weiRaised",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "receiver",
+          "type": "address"
+        }
+      ],
+      "name": "makeInvestment",
+      "outputs": [],
+      "payable": true,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "founderAddress",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "finalize",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "tokensSold",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "isMinimumGoalReached",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "multisigWallet",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "tokenAddress",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "transferMinimumGoalFund",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "refundAmount",
+      "outputs": [],
+      "payable": true,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "refundedAmount",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "investedAmountRecord",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "finalized",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "endDate",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "isCrowdsaleFull",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "investorCount",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "token",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_founderAddress",
+          "type": "address"
+        },
+        {
+          "name": "_startDate",
+          "type": "uint256"
+        },
+        {
+          "name": "_endDate",
+          "type": "uint256"
+        },
+        {
+          "name": "_tokenAddress",
+          "type": "address"
+        },
+        {
+          "name": "_tokenConversionRate",
+          "type": "uint64"
+        },
+        {
+          "name": "_minimumFundingGoal",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "constructor"
+    },
+    {
+      "payable": true,
+      "type": "fallback"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "_investor",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "_weiAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "_tokenAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Invested",
+      "type": "event"
+    }
+  ],
+  "unlinked_binary": "0x60606040526000600681905560078190556008819055600955600a8054604060020a60ff0219169055341561003057fe5b60405160c080610b1183398101604090815281516020830151918301516060840151608085015160a090950151929491929091905b60008054600160a060020a03808916600160a060020a031992831617909255600a8054600180549488169490931684179092556901000000000000000000909202604860020a60e860020a031967ffffffffffffffff861667ffffffffffffffff19909316929092179190911617905584158015906100e357508315155b80156100ef5750848410155b80156100fa57508015155b156101185760038590556004849055670de0b6b3a764000081026005555b5b5050505050505b6109e28061012f6000396000f3006060604052361561010c5763ffffffff60e060020a6000350416630b97bc86811461011e57806313f4e977146101405780631865c57d14610162578063317118841461019657806337e90fe5146101c25780634042b66f146101f0578063409296491461021257806346bb2833146102285780634bb278f314610254578063518ab2a8146102665780637c2e08a3146102885780639075becf146102ac5780639d76ea58146102d8578063abb654fc14610304578063ad33513f14610316578063ad7c6ed114610320578063b134789014610342578063b3f05b9714610370578063c24a0f8b14610394578063d5d09021146103b6578063d7e64c00146103da578063fc0c546a146103fc575b61011c5b61011933610428565b5b565b005b341561012657fe5b61012e61062e565b60408051918252519081900360200190f35b341561014857fe5b61012e610634565b60408051918252519081900360200190f35b341561016a57fe5b61017261063a565b6040518082600581111561018257fe5b60ff16815260200191505060405180910390f35b341561019e57fe5b6101a66106e2565b604080516001604060020a039092168252519081900360200190f35b34156101ca57fe5b61012e600160a060020a03600435166106f1565b60408051918252519081900360200190f35b34156101f857fe5b61012e610703565b60408051918252519081900360200190f35b61011c600160a060020a0360043516610428565b005b341561023057fe5b610238610709565b60408051600160a060020a039092168252519081900360200190f35b341561025c57fe5b61011c610718565b005b341561026e57fe5b61012e61076d565b60408051918252519081900360200190f35b341561029057fe5b610298610773565b604080519115158252519081900360200190f35b34156102b457fe5b61023861077f565b60408051600160a060020a039092168252519081900360200190f35b34156102e057fe5b61023861078e565b60408051600160a060020a039092168252519081900360200190f35b341561030c57fe5b61011c61079d565b005b61011c610817565b005b341561032857fe5b61012e610861565b60408051918252519081900360200190f35b341561034a57fe5b61012e600160a060020a0360043516610867565b60408051918252519081900360200190f35b341561037857fe5b610298610879565b604080519115158252519081900360200190f35b341561039c57fe5b61012e610889565b60408051918252519081900360200190f35b34156103be57fe5b61029861088f565b604080519115158252519081900360200190f35b34156103e257fe5b61012e61092f565b60408051918252519081900360200190f35b341561040457fe5b610238610935565b60408051600160a060020a039092168252519081900360200190f35b6000803415156104385760006000fd5b60015b61044361063a565b600581111561044e57fe5b14156106215761045c610773565b1561046a5761046a3461094b565b5b600a5434925061048b9083906001604060020a031663ffffffff61097f16565b6006549091506104a1908363ffffffff61099c16565b600655600160a060020a0383166000908152600b602052604090205415156104cd576007805460010190555b600a546040805160006020918201819052825160e060020a63a9059cbb028152600160a060020a038881166004830152602482018790529351604860020a9095049093169363a9059cbb9360448082019493918390030190829087803b151561053257fe5b6102c65a03f1151561054057fe5b50506040515115905061061c57600854610560908263ffffffff61099c16565b600855600160a060020a0383166000908152600b602052604090205461058c908363ffffffff61099c16565b600160a060020a0384166000908152600b6020908152604080832093909355600c905220546105c1908263ffffffff61099c16565b600160a060020a0384166000818152600c6020908152604091829020939093558051858152928301849052805191927f9e9d071824fd57d062ca63fd8b786d8da48a6807eebbcb2d83f9e8d21398e28c929081900390910190a25b610627565b60006000fd5b5b5b505050565b60035481565b60055481565b600a54600090604060020a900460ff1615610657575060046106da565b600354421015610669575060006106da565b6004544211158015610680575061067e61088f565b155b1561068d575060016106da565b610695610773565b156106a2575060026106da565b6106aa610773565b1580156106b957506000600654115b80156106c9575060065460095410155b156106d6575060056106da565b5060035b5b5b5b5b5b90565b600a546001604060020a031681565b600c6020526000908152604090205481565b60065481565b600054600160a060020a031681565b6002805b61072461063a565b600581111561072f57fe5b1461073a5760006000fd5b600a54604060020a900460ff16156107525760006000fd5b600a8054604060020a60ff021916604060020a1790555b5b50565b60085481565b60055460065410155b90565b600254600160a060020a031681565b600154600160a060020a031681565b6002805b6107a961063a565b60058111156107b457fe5b146107bf5760006000fd5b60005433600160a060020a039081169116146107db5760006000fd5b60008054604051600160a060020a0391821692309092163180156108fc0292909190818181858888f19350505050151561076957fe5b5b5b5b50565b6003805b61082361063a565b600581111561082e57fe5b146108395760006000fd5b3415156108465760006000fd5b600954610859903463ffffffff61099c16565b6009555b5b50565b60095481565b600b6020526000908152604090205481565b600a54604060020a900460ff1681565b60045481565b6000600a60099054906101000a9004600160a060020a0316600160a060020a03166353dbd1a66000604051602001526040518163ffffffff1660e060020a028152600401809050602060405180830381600087803b15156108ec57fe5b6102c65a03f115156108fa57fe5b5050604080516020808220600854835292519182900301902014159050610923575060016106da565b5060006106da565b5b90565b60075481565b600a54604860020a9004600160a060020a031681565b60008054604051600160a060020a039091169183156108fc02918491818181858888f19350505050151561076957fe5b5b50565b60006000828481151561098e57fe5b0490508091505b5092915050565b6000828201838110156109ab57fe5b8091505b50929150505600a165627a7a72305820c94a2449514c6a74355dd61237047825f740b90c21f4b0dd2b59427cb49f97950029",
+  "networks": {},
+  "schema_version": "0.0.5",
+  "updated_at": 1502707413205
+}
