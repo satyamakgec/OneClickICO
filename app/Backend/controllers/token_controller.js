@@ -6,18 +6,18 @@ Web3 = new web3();
 Web3.setProvider( new web3.providers.HttpProvider("http://localhost:8545"));
 
 tokenHandlerInstance = Web3.eth.contract(TokenHandler.abi); 
-instance = tokenHandlerInstance.at('0xc501f2df181e5d5bdba770dbf46e271a2e0f6dc7');
+instance = tokenHandlerInstance.at('0x7072fdddf032f31b3241e457cc2b9cf2bd04fb16');
 
-module.exports.createToken = function(req,res){
-  Web3.setProvider(req.web3.currentprovider());
-  instance.createToken(req.initialSupply , req.decimal ,  req.tokenName , req.tokenSymbol).then(function(result){
-       console.log(result);
-       res.send(result);
-  }).catch(function(err){
-       console.log(err);
-  });
+// module.exports.createToken = function(req,res){
+//   Web3.setProvider(req.web3.currentprovider());
+//   instance.createToken(req.initialSupply , req.decimal ,  req.tokenName , req.tokenSymbol).then(function(result){
+//        console.log(result);
+//        res.send(result);
+//   }).catch(function(err){
+//        console.log(err);
+//   });
 
-}
+// }
 
 
 module.exports.getAllTokens = function(req,res){
@@ -56,12 +56,12 @@ module.exports.getAllTokens = function(req,res){
 
 
 module.exports.createToken= function(req,res){
- var initialSupply = req.initialSupply;
- var decimal = req.decimal;
- var tokenName= req.tokenName;
- var tokenSymbol= req.tokenSymbol;
-
-  instance.createToken(initialSupply,decimal,tokenName,tokenSymbol).then(function(result){
+ var initialSupply = req.body.initialSupply;
+ var decimal = req.body.decimal;
+ var tokenName= req.body.tokenName;
+ var tokenSymbol= req.body.tokenSymbol;
+ console.log(instance);
+  instance.createToken(initialSupply,decimal,tokenName,tokenSymbol,{from : '0x98b8cab2a36cad596f1d74449d00095e5f3c15f9',gas : 4000000}).then(function(result){
         console.log(result);
         res.send(result);
       }).catch(function(err){

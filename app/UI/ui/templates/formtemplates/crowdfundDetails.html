@@ -1,0 +1,56 @@
+<div>
+  
+  <form>
+    <center><img src="https://png.icons8.com/crowdfunding/dotty/80" title="Crowdfunding" width="90" height="90"></center>
+    <h4>Crowdfund Details</h4>
+
+    <label for="tokenConversionRate">Token Conversion Rate</label> 
+    <div class="well well-sm">
+    Conversion Rate = Price Of 1 ETH in $ / Price Of 1 Token in $
+    </div>
+    <input type="number" name="tokenConversionRate" id="tokenConversionRate" placeholder="Token Conversion Rate" ng-model="tokenConversionRate" required>
+   
+    <label for="minimumFundingGoal">Minimum Funding Goal</label> 
+    <div class="well well-sm">
+    Minimum funding goal needs to be achieved during crowdfunding else the amount raised will be refunded.
+    </div>
+    <input type="number" name="minimumFundingGoal" id="minimumFundingGoal" placeholder="Enter minimum funding goal in Wei" ng-model="minimumFundingGoal" required>
+    
+    <label for="startingDate">Starting Date</label> 
+    <input type="text" style="width: 80%;float: left;border-radius: 4px 0px 0px 4px;" ng-click = "goEventStartDate();" placeholder = "Select date" ng-model="startingDate">
+      <button class="button2"  style="margin-top:0;float: left;width: 20%;border-radius: 0 4px 4px 0px;" ng-click="goEventStartDate();"> <i class="fa fa-calendar" style = "color:#fff" aria-hidden="true"></i></button>
+    </input>
+    <div ng-show="datePicker1">
+        <div style="z-index:1; min-height:290px;"> 
+        <!--<button type="btn btn-xs" class="close" aria-label="Close" ng-click="close();">-->
+        <!--<i class="fa fa-times-circle" style="color:#291919;" aria-hidden="true" ></i>
+        </button>                -->
+        <datepicker id= "startingDate" ng-model="startingDate" min-date="minDate" show-weeks="false" class="well well-sm" style = "background-color:cornsilk ;margin-bottom:0">             
+        </datepicker>
+
+        </div>
+        </div> 
+
+   <br>
+    <label for="closingdate">Closing Date</label> 
+    <input type="text"  style="width: 80%;float: left;border-radius: 4px 0px 0px 4px;" ng-click = "goEventCloseDate();" placeholder = "Select date" ng-model="closingDate">
+    <button class="button2" style="margin-top:0;float:left;width: 20%;border-radius: 0 4px 4px 0px;" ng-click="goEventCloseDate();"> <i class="fa fa-calendar" style = "color:#fff" aria-hidden="true"></i></button>
+    </input> 
+        <div ng-show="datePicker2">
+        <div style="z-index:1; min-height:290px;"> 
+        <!--<button type="btn btn-xs" class="close" aria-label="Close" ng-click="close();">-->
+        <!--<i class="fa fa-times-circle" style="color:#291919;" aria-hidden="true" ></i>
+        </button>                -->
+        <datepicker id= "expiryDate" ng-model="closingDate" min-date="minDate" show-weeks="false" class="well well-sm" style = "background-color:cornsilk ;margin-bottom:0">             
+        </datepicker>
+
+        </div>
+        </div> 
+
+        <button ng-click="finished()"  class="button button2" style = "width:100%">
+        Submit 
+        </button>
+
+  </form>
+  
+</div>

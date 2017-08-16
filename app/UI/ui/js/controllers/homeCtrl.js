@@ -1,10 +1,10 @@
-app.controller('homeCtrl', function (User,$scope,$window,$rootScope,$stateParams,$state,$anchorScroll) {
+app.controller('homeCtrl', function (ICOService,User,$scope,$window,$rootScope,$stateParams,$state,$anchorScroll) {
     
 	$scope.checkWeb3 = $rootScope.checkWeb3;
 	$scope.checkOngoingICOs = false;    
     $scope.OngoingICOs = [];
 	$scope.icoDetails = {};
-
+    $scope.shareFlag;
     $scope.loadOngoingICOs = function(){
 		var address = $rootScope.address;
         // User.getAllUserOngoingICOs(address).then(function(result){
@@ -66,12 +66,40 @@ app.controller('homeCtrl', function (User,$scope,$window,$rootScope,$stateParams
 									developers : '5',
 									futurestakeholders : '10',
 									marketmakers : '3'
+								},
+								tokensLeftFor:{
+                                    founders : '2000',
+									crowdfunding : '8000000',
+									developers : '500',
+									futurestakeholders : '1000',
+									marketmakers : '3000'
 								}
 							}
 		console.log($scope.icoDetails);
 
 	}
-    
+    $scope.DistributeShare = function(val){
+          $scope.shareFlag = val;
+	}
+    $scope.distribute = function(){
+		var data = {
+			         tokenAmount : $scope.tokenAmount,
+					 address : $scope.recieverAddr,
+					 flag : $scope.shareFlag
+		};
+		console.log(data);
+		 $scope.distributeLoader = true;
+		ICOService.distributeTokensToShareholder(data).then(function(response){
+           console.log(response);
+		   if(response!=undefined){
+			   $scope.distributeLoader = false;
+		   }
+		}).catch(function(err){
+                console.log(err);
+				 $scope.distributeLoader = true;
+		});
+	}
+   
 
 	$(window).scroll(function() {
 

@@ -26,9 +26,9 @@ var app = angular.module('app', ['ui.router','ui.bootstrap'])
             templateUrl: 'templates/formtemplates/tokendistribution.html',
             controller: 'createICOCtrl'
         })
-        .state('icodetails', {
-            url: '/icodetails',
-            templateUrl: 'templates/formtemplates/icodetails.html',
+        .state('crowdfunddetails', {
+            url: '/crowdfunddetails',
+            templateUrl: 'templates/formtemplates/crowdfundDetails.html',
             controller: 'createICOCtrl'
         })
         .state('reviewpage', {

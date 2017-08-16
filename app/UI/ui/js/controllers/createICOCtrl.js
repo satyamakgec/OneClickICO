@@ -2,14 +2,44 @@ app.controller('createICOCtrl', function (ICOService,$scope,$state,$rootScope,$w
 $scope.formData = {};
 $scope.web3 = $rootScope.web3;
 $scope.tokenDetailsLoader = false;
+$scope.closingDate = '';
+
+
+$scope.percentageTokensDistributed = 0;
+$scope.devShare = 0;
+$scope.marketmakersShare = 0;
+$scope.futureStakeholdersShare = 0;
+$scope.foundersShare = 0;
+$scope.crowdfundShare = 0;
+
+$scope.checkDistribution = function(val){
+    
+    if(val > (100 - $scope.percentageTokensDistributed) || (100 - $scope.percentageTokensDistributed) < 0){
+    $window.alert($scope.percentageTokensDistributed);
+    }
+    else{
+    $scope.percentageTokensDistributed = $scope.devShare + $scope.marketmakersShare + $scope.futureStakeholdersShare + $scope.foundersShare + $scope.crowdfundShare;
+    }
+
+}
+
+$scope.ICONextClick = function(){
+    if( $scope.percentageTokensDistributed != 100){
+          $window.alert("Distribution is not done properly!");  
+     }
+    else{
+    $state.go('crowdfunddetails');
+    }
+}
+
 
 $scope.tokenDistributionNextClick = function(){
-
+    
     var tokenDetails = {
-       tokenName : $scope.formData.tokenName,
-       tokenSymbol : $scope.formData.symbol,
-       initialSupply : $scope.formData.initialSupply,
-       decimal : $scope.formData.decimal
+       tokenName : $scope.tokenName,
+       tokenSymbol : $scope.symbol,
+       initialSupply : $scope.initialSupply,
+       decimal : $scope.decimal
     }
     var data = {
         tokendetails : tokenDetails,
@@ -29,41 +59,30 @@ $scope.tokenDistributionNextClick = function(){
 
    
 }
-$scope.ICONextClick = function(){
-    $state.go('icodetails');
-}
 
 
- $scope.datePicker = false;
- $scope.goEvent = function(){
-   $scope.datePicker = !$scope.datePicker;
+ $scope.datePicker1 = false;
+ $scope.goEventStartDate = function(){
+   $scope.datePicker1 = !$scope.datePicker1;
  }
- $scope.close = function(){
+ $scope.close1 = function(){
+   $scope.datePicker1 = false;
+ }
+
+ $scope.datePicker2 = false;
+ $scope.goEventCloseDate = function(){
+   $scope.datePicker2 = !$scope.datePicker2;
+ }
+ $scope.close2 = function(){
    $scope.datePicker = false;
  }
-  
-//      /* datepicker auto close */
-//   $scope.$watch('formData.closingDate', function() {
-// 	  if($scope.formData.closingDate!== undefined){
-//      $scope.datePicker = !$scope.datePicker;
-// 	  }else{
-// 		  $scope.datePicker = false;
-// 	  }
-// });
 
-
-    // $(function () {
-    // $('#datetimepicker6').datetimepicker();
-    // $('#datetimepicker7').datetimepicker({
-    //     useCurrent: false //Important! See issue #1075
-    // });
-    // $("#datetimepicker6").on("dp.change", function (e) {
-    //     $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-    // });
-    // $("#datetimepicker7").on("dp.change", function (e) {
-    //     $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-    // });
-    // });
+$scope.finished = function(){
+    var data = {
+        "closingDate":$scope.closingDate
+    }
+    console.log(data);
+} 
 
 });
 

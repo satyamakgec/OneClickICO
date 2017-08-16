@@ -12,7 +12,7 @@ app.use(express.static(__dirname + './UI/ui'));
 require('babel-register'); 
 require('./Backend/api/route')(app,express);
 
-app.listen(env.port,function(err){
+app.listen(3000,function(err){
 	if(err){
 		console.log(err);
 	}else {

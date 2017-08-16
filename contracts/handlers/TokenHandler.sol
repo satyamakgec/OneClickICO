@@ -8,7 +8,7 @@ contract TokenHandler is TokenGenerator{
 
 Token token;
 
-function createToken(uint256 _initialSupply , uint8 _decimal , bytes32 _tokenName , bytes32 _tokenSymbol) returns (bool){
+function createToken(uint256 _initialSupply , uint8 _decimal , bytes32 _tokenName , bytes32 _tokenSymbol) returns (bool) {
     generateNewToken(_initialSupply , _decimal ,  _tokenName , _tokenSymbol );
     return true;
 }

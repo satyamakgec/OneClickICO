@@ -9,24 +9,79 @@
 
 </div>
 
+<br>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-3">
+    	    <div class="hero-widget well well-sm">
+                <div class="icon">
+                     <img src="https://png.icons8.com/diamond/androidL/32" title="Diamond" width="32" height="32">
+                </div>
+                <div class="text">
+                    
+                    <label class="text-muted">Token symbol :</label>
+                    <var>3</var>
+                </div>
+                <div class="options">
+                    <a href="javascript:;" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-plus"></i> Add a guest</a>
+                </div>
+            </div>
+		</div>
+        <div class="col-sm-3">
+            <div class="hero-widget well well-sm">
+                <div class="icon">
+                     <img src="https://png.icons8.com/goal/Dusk_Wired/64" title="Goal" width="32" height="32">
+                </div>
+                <div class="text">
+                    <var>614</var>
+                    <label class="text-muted">page likes</label>
+                </div>
+                <div class="options">
+                    <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-search"></i> View traffic</a>
+                </div>
+            </div>
+		</div>
+        <div class="col-sm-3">
+            <div class="hero-widget well well-sm">
+                <div class="icon">
+                     <i class="glyphicon glyphicon-tags"></i>
+                </div>
+                <div class="text">
+                    <var>73</var>
+                    <label class="text-muted">total orders</label>
+                </div>
+                <div class="options">
+                    <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-search"></i> View orders</a>
+                </div>
+            </div>
+    	</div>
+        <div class="col-sm-3">
+            <div class="hero-widget well well-sm">
+                <div class="icon">
+                     <i class="glyphicon glyphicon-cog"></i>
+                </div>
+                <div class="text">
+                    <var>75%</var>
+                    <label class="text-muted">profile complete</label>
+                </div>
+                <div class="options">
+                    <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-wrench"></i> Edit profile</a>
+                </div>
+            </div>
+		</div>
+	</div>
+</div>
+
 <div>
 
     <div class = "row" style = "margin:0;max-width:none">
-        <div class = "col-md-6" style = "padding-right:40px;padding-left:0">  
+        <div class = "col-md-4" style = "padding-right:40px;padding-left:0">  
 <span style="display:inline"> 
     
     <h3 ><i class="fa fa-bars" aria-hidden="true" style = "padding-right:7px;color:#009999"></i>Overview</h3>
     </span>  
             <table  class="table table-condensed table-hover" style = "border:none; background-color:transparent;">
                 <tbody>
-                    <!--<tr class = "tr-style">
-                    <td class = "td-style">
-                    Name
-                    </td>
-                    <td style = "vertical-align: middle">
-                    {{icoDetails.name}}
-                    </td>    
-                    </tr> -->
                     <tr  class = "tr-style">
                     <td  class = "td-style">
                     Symbol
@@ -70,12 +125,27 @@
                 </tbody>    
             </table>
         </div>
-        <div class = "col-md-6"  style = "padding-left :40px">
+        <div class = "col-md-8"  style = "padding-left :40px">
             <span style="display:inline"> 
     
     <h3 ><i class="fa fa-pie-chart" aria-hidden="true" style = "padding-right:7px;color:#009999"></i>Distribution</h3>
     </span> 
          <table  class="table table-condensed table-hover" style = "border:none; background-color:transparent;">
+                <thead style = "background-color:#009999;color:#fff">
+                    <tr>
+                        <th>
+                            Shareholders
+                        </th>
+                        <th>
+                            % Share Allocated
+                        </th>
+                        <th>
+                            Tokens remaining (WEI)
+                        </th>    
+                        <th>
+                        </th>            
+                    </tr>    
+                </thead>    
                 <tbody>
                     <tr class = "tr-style">
                     <td class = "td-style">
@@ -83,7 +153,13 @@
                     </td>
                     <td style = "vertical-align: middle">
                     {{icoDetails.distribution.developers}}%
-                    </td>    
+                    </td>
+                    <td>
+                    {{icoDetails.tokensLeftFor.developers}}    
+                    </td>     
+                    <td>
+                    <button ng-click="DistributeShare(1)"  class="button button3" data-toggle="modal" data-target="#basicModal">Distribute</button>
+                    </td>   
                     </tr> 
                     <tr class = "tr-style">
                     <td class = "td-style">
@@ -91,7 +167,13 @@
                     </td>
                     <td style = "vertical-align: middle">
                     {{icoDetails.distribution.founders}}%
-                    </td>    
+                    </td>
+                    <td>
+                    {{icoDetails.tokensLeftFor.founders}}    
+                    </td>   
+                    <td>
+                    <button ng-click="DistributeShare(2)"  class="button button3" data-toggle="modal" data-target="#basicModal">Distribute</button>
+                    </td>  
                     </tr> 
                     <tr class = "tr-style">
                     <td class = "td-style">
@@ -99,6 +181,12 @@
                     </td>
                     <td style = "vertical-align: middle">
                     {{icoDetails.distribution.marketmakers}}%
+                    </td>
+                    <td>
+                    {{icoDetails.tokensLeftFor.marketmakers}}    
+                    </td>  
+                    <td>
+                    <button ng-click="DistributeShare(3)"  class="button button3" data-toggle="modal" data-target="#basicModal">Distribute</button>
                     </td>    
                     </tr> 
                     <tr class = "tr-style">
@@ -107,15 +195,25 @@
                     </td>
                     <td style = "vertical-align: middle">
                     {{icoDetails.distribution.futurestakeholders}}%
-                    </td>    
+                    </td>
+                    <td>
+                    {{icoDetails.tokensLeftFor.futurestakeholders}}    
+                    </td> 
+                    <td>
+                    <button ng-click="DistributeShare(4)"  class="button button3" data-toggle="modal" data-target="#basicModal">Distribute</button>
+                    </td>     
                     </tr>
                     <tr class = "tr-style">
                     <td class = "td-style">
                     crowdfunding
-                    </td>
+                    </td>    
                     <td style = "vertical-align: middle">
                     {{icoDetails.distribution.crowdfunding}}%
-                    </td>    
+                    </td>
+                    <td>
+                     </td>  
+                     <td>
+                     </td>     
                     </tr>
                     
                 </tbody>    
@@ -125,3 +223,30 @@
    
 </div>    
 </div>
+<center>
+  <div class="loader" ng-show = "distributeLoader" style = "z-index:1000">Loading...</div>    
+<div  ng-show = "!distributeLoader" class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog" style = "width:425px">
+    <div class="modal-content"  style = "background-color:cornsilk">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <center><img src="https://png.icons8.com/coins/dotty/80" title="Coins" width="80" height="80"></center>
+        <h4 class="modal-title" id="myModalLabel">Distribute Tokens</h4>
+      </div>
+      <div class="modal-body" style = "text-align:left">
+
+            <label for="tokenAmount">Token Amount</label> 
+            <input type="number" name="tokenAmount" id="tokenAmount" placeholder="Enter number of tokens" ng-model="tokenAmount" required>
+             <br>
+              <label for="recieverAddr">Reciever's Address</label> 
+            <input type="text" name="recieverAddr" id="recieverAddr" placeholder="Enter ethereum account address" ng-model="recieverAddr" required>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="button button3" data-dismiss="modal">Close</button>
+        <button type="button" class="button button3" ng-click = "distribute()">Distribute</button>
+      </div>
+    </div>
+  </div>
+</div>
+</center>
