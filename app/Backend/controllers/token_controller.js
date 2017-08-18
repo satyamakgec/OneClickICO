@@ -98,3 +98,4 @@ module.exports.setTokenDistribution = function(req,res){
 
     instance.assignTokenDistribution(tokenAddress, tokenAllocatedToDevelopers, tokenAllocatedToFounders, tokenAllocatedToMarketMaker, tokenAllocatedToFutureStakeHolers, tokenAllocatedToCrowdFund,{from: address ,gas:4000000});
 }
+
