@@ -21,5 +21,5 @@ app.listen(3000,function(err){
 });
 
 app.get('*',function(req,res){
-	res.sendFile( __dirname + './UI/ui/index.html');
+	res.sendFile( __dirname + '/UI/ui/index.html');
 });

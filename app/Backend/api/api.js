@@ -7,6 +7,9 @@ module.exports = function(app,express){
     api.post('/',);
    // api.get('/user/:email',index.user.profileInfo);
    api.post('/createToken',Token.createToken);
-
+   api.get('/coinbase',Token.getCoinbase);
+   api.get('/default',Token.defaultAddress);
+   api.post('/getTokens',Token.getAllTokens);
+   api.post('/tokenDistribution',Token.setTokenDistribution);
     return api;
 };

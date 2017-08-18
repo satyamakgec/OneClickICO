@@ -8,7 +8,7 @@ contract TokenGenerator is DataStore{
     Token newToken;    
 
     event PlatformAddressChange(uint _blockTimestamp, address _newAddress);
-    event TokenGenerated(uint _blockTimeStamp , address indexed _owner , uint _intialSupply , bytes32 indexed _symbol , bytes32 indexed _tokenName);
+    event TokenGenerated(uint _blockTimeStamp , address _owner , uint256 _intialSupply , bytes32 _symbol , bytes32 _tokenName);
 
     modifier onlyPlatform(address _sender){
         require(platform == _sender);
@@ -47,4 +47,5 @@ contract TokenGenerator is DataStore{
     }
 
    
+  
 }

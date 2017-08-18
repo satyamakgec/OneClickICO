@@ -67,7 +67,7 @@ contract Token is Ownable , BasicToken{
         isCrowdFundAddressSet = !isCrowdFundAddressSet;
     }
 
-    function setTokenDistribution(uint _tokenAllocatedToDevelopers, uint _tokenAllocatedToFounders, uint _tokenAllocatedToMarketMaker,  uint _tokenAllocatedToFutureStakeHolers, uint _tokenAllocatedToCrowdFund)onlyOwner isTokenDistribution returns(bool){
+    function setTokenDistribution(uint _tokenAllocatedToDevelopers, uint _tokenAllocatedToFounders, uint _tokenAllocatedToMarketMaker,  uint _tokenAllocatedToFutureStakeHolers, uint _tokenAllocatedToCrowdFund) onlyOwner isTokenDistribution returns(address){
         uint totalTokens = _tokenAllocatedToCrowdFund + _tokenAllocatedToDevelopers + _tokenAllocatedToFounders + _tokenAllocatedToFutureStakeHolers + _tokenAllocatedToMarketMaker;
         assert(totalTokens == 100);
         tokenAllocatedToDevelopers = ((_tokenAllocatedToDevelopers).mul(initialSupply)).div(100);
@@ -78,7 +78,7 @@ contract Token is Ownable , BasicToken{
         balances[owner] = tokenAllocatedToFounders;
         isTokenDistributionSet = !isTokenDistributionSet;
         AssignedToken(now , owner);
-        return true;
+        return owner;
     }
 
     function allocateTokenToDevelopers(address _to , uint _value) onlyOwner returns (bool){
