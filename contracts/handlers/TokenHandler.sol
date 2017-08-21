@@ -10,6 +10,7 @@ Token token;
 
 event TokenDistributionSet(uint256 _timestamp, address tokenAddress);
 event TokenAllocated(address recipient,uint256 value);
+event CrowdFundAddressSet(bool);  
 
 function createToken(uint256 _initialSupply , uint256 _decimal , bytes32 _tokenName , bytes32 _tokenSymbol) returns (bool) {
     generateNewToken(_initialSupply , _decimal ,  _tokenName , _tokenSymbol );
@@ -17,10 +18,14 @@ function createToken(uint256 _initialSupply , uint256 _decimal , bytes32 _tokenN
     return true;
 }
 
-function assignCrowdFundAddress(address _crowdFund , address tokenAddr) notPlatform {
-    
+function assignCrowdFundAddress(address tokenAddr) notPlatform {
     token = Token(tokenAddr);
+    address _crowdFund = CrowdFundCreators[tokenAddr];
+    if(_crowdFund == 0)
+    throw;
     token.setCrowdFundAddress(_crowdFund);
+    CrowdFundAddressSet(true);
+
 
 }
 

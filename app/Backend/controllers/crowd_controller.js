@@ -1,13 +1,13 @@
+var Token = require('./token_controller');
 var async = require('async');
 var asyncLoop = require('node-async-loop');
-var web3 = require('web3');
-var CrowdFundHandler = require("./../../../build/contracts/CrowdFundHandler.json");
 var BigNumber = require("bignumber.js");
 var Q = require("q");
-Web3 = new web3();
-Web3.setProvider( new web3.providers.HttpProvider("http://localhost:8545"));
-crowdfundInstance = Web3.eth.contract(CrowdFundHandler.abi); 
-instance = crowdfundInstance.at('0x615665dace3ad94654167685634f7322fdd7de14');
+
+var Connection = require("./../config/connection");
+var Instance = Connection.crowdInstance;
+var Web3 = Connection.Web3;
+
 var address = "0x9227c67a8704691ad416b5f4c0ca88139c9ab829";
 
 module.exports.createCrowdFund= function(req,res){
@@ -18,9 +18,7 @@ module.exports.createCrowdFund= function(req,res){
  var tokenConversionRate = req.body.tokenConversionRate;
  var minimumFundingGoal = req.body.minimumFundingGoal;
 
- console.log(startDate);
-
-    var event = instance.CrowdFundGenerated();
+    var event = Instance.CrowdFundGenerated();
         event.watch(function(err,result){
         if(err){
              console.log(err);
@@ -28,9 +26,14 @@ module.exports.createCrowdFund= function(req,res){
         }else{
              console.log(result);
              event.stopWatching();
-             res.send(result);
+             Token.setCrowdFundAddress(tokenAddress).then(function(response){
+                 res.send({"CrowdFundAddressSet":response,"CrowdFundCreated": result});
+             }).catch(function(err){
+                 res.send(err);
+             });
         }
     });
    
-    instance.createCrowdFund(founderAddress,startDate,endDate,tokenAddress,tokenConversionRate,minimumFundingGoal,{from: address ,gas:4000000});          
+    Instance.createCrowdFund(founderAddress,startDate,endDate,tokenAddress,tokenConversionRate,minimumFundingGoal,{from: address ,gas:4000000});       
+     
 }
