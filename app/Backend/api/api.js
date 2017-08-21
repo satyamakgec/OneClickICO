@@ -11,5 +11,7 @@ module.exports = function(app,express){
    api.get('/default',Token.defaultAddress);
    api.post('/getTokens',Token.getAllTokens);
    api.post('/tokenDistribution',Token.setTokenDistribution);
+   api.post('/setCrowdFundAddress',Token.setCrowdFundAddress);
+   api.post('/distributeToken',Token.distributeTokens);
     return api;
 };

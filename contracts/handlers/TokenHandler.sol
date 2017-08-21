@@ -9,6 +9,7 @@ contract TokenHandler is TokenGenerator{
 Token token;
 
 event TokenDistributionSet(uint256 _timestamp, address owner);
+event TokenAllocated(address recipient,uint256 value);
 
 function createToken(uint256 _initialSupply , uint8 _decimal , bytes32 _tokenName , bytes32 _tokenSymbol) returns (bool) {
     generateNewToken(_initialSupply , _decimal ,  _tokenName , _tokenSymbol );
@@ -30,21 +31,23 @@ function assignTokenDistribution(address tokenAddr, uint _tokenAllocatedToDevelo
     return true;
 }
 
-function assignTokenToDevelopers(address tokenAddr, address _to , uint _value) notPlatform returns(bool){
+function assignTokenToDeveloper(address tokenAddr, address _to , uint _value) notPlatform returns(bool){
     token = Token(tokenAddr);
 
    if( token.allocateTokenToDevelopers( _to , _value)){
+       TokenAllocated(_to,_value);
        return true;
    }else{
        return false;
    }
 }
 
-function assignTokenToFounders(address tokenAddr, address _to , uint _value) notPlatform returns(bool){
+function assignTokenToFounder(address tokenAddr, address _to , uint _value) notPlatform returns(bool){
    
     token = Token(tokenAddr);
    
    if( token.allocateTokenToFounders( _to , _value)){
+       TokenAllocated(_to,_value);
        return true;
    }else{
        return false;
@@ -55,16 +58,18 @@ function assignTokenToMarketMaker(address tokenAddr, address _to , uint _value) 
     token = Token(tokenAddr);
    
    if( token.allocateTokenToMarketMaker( _to , _value)){
+       TokenAllocated(_to,_value);
        return true;
    }else{
        return false;
    }
 }
 
-function assignTokenToFutureStakeHolers(address tokenAddr, address _to , uint _value ) notPlatform returns(bool){
+function assignTokenToFutureStakeHoler(address tokenAddr, address _to , uint _value ) notPlatform returns(bool){
    
     token = Token(tokenAddr);
    if( token.allocateTokenToFutureStakeHolers( _to , _value)){
+       TokenAllocated(_to,_value);
        return true;
    }else{
        return false;
