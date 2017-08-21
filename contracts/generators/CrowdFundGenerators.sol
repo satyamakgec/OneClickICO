@@ -1,39 +1,39 @@
 pragma solidity ^0.4.11;
 
-// import '../CrowdFund.sol';
-// import '../data/DataStore.sol';
+import '../CrowdFund.sol';
+import '../data/DataStore.sol';
 
-// contract CrowdFundGenerators is DataStore {
+contract CrowdFundGenerators is DataStore {
 
-//     CrowdFund newCrowdFund;
+    CrowdFund newCrowdFund;
 
-//     event PlatformAddressChange(uint256 _blockTimestamp, address _newAddress);
-//     event CrowdFundGenerated(uint256 _blockTimeStamp , address indexed _owner);
+    event PlatformAddressChange(uint256 _blockTimestamp, address _newAddress);
+    event CrowdFundGenerated(uint256 _blockTimeStamp , address indexed _owner);
 
-//     modifier onlyPlatform(){
-//         require(platform == msg.sender);
-//         _;
-//     }
+    modifier onlyPlatform(){
+        require(platform == msg.sender);
+        _;
+    }
 
-//     modifier nonZerAddress(address _to){
-//         require(_to != 0x0);
-//         _;
-//     }
+    modifier nonZerAddress(address _to){
+        require(_to != 0x0);
+        _;
+    }
     
-//     modifier notPlatform(){
-//         require(msg.sender != platform);
-//         _;
-//     }
+    modifier notPlatform(){
+        require(msg.sender != platform);
+        _;
+    }
 
-//     function CrowdFundGenerators(){
-//         platform = msg.sender;
-//     }
+    function CrowdFundGenerators(){
+        platform = msg.sender;
+    }
 
-//      function generateCrowdFund(address _founderAddress , uint8 _duration , uint256 _startdate ,address _tokenAddress ) returns (bool){
-//          newCrowdFund = new CrowdFund(address _founderAddress , uint8 _duration);
-//          CrowdFundCreators[msg.sender][_tokenAddress] = newCrowdFund;
-//          CrowdFundGenerated(now ,msg.sender);
-//          return true;   
-//     }
+     function generateCrowdFund(address _founderAddress , uint256 _startDate , uint256 _endDate ,address _tokenAddress , uint64 _tokenConversionRate, uint256 _minimumFundingGoal ) returns (bool){
+         newCrowdFund = new CrowdFund(_founderAddress , _startDate , _endDate , _tokenAddress ,_tokenConversionRate, _minimumFundingGoal);
+         CrowdFundCreators[_tokenAddress] = newCrowdFund;
+         CrowdFundGenerated(now ,msg.sender);
+         return true;   
+    }
 
-// }
+}

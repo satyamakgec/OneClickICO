@@ -1,16 +1,29 @@
 pragma solidity ^0.4.11;
 
+import '../CrowdFund.sol';
+import '../generators/CrowdFundGenerators.sol';
 
-// contract CrowdFundHandler is CrowdFund , CrowdFundGenerator , DataStore{
+contract CrowdFundHandler is CrowdFundGenerators {
 
-//    function CrowdFundHandler(){
-//        platform = msg.sender;
-//    }
+    CrowdFund crowdFund;
 
-// function createToken(uint _initialSupply , uint8 _decimal , string _tokenName , string _tokenSymbol) returns (bool){
-//     generateNewToken(uint _initialSupply , uint8 _decimal , string _tokenName , string _tokenSymbol );
-//     return true;
-// }
+   function CrowdFundHandler() {
+       platform = msg.sender;
+   }
 
+function createCrowdFund(address _founderAddress, uint256 _startDate, uint256 _endDate, address _tokenAddress, uint64 _tokenConversionRate, uint256 _minimumFundingGoal ) returns (bool) {
+    generateCrowdFund(_founderAddress, _startDate, _endDate, _tokenAddress, _tokenConversionRate, _minimumFundingGoal);
+    return true;
+}
 
-// }
+function crowdsaleStatus(address _crowdFund) constant returns(bool) {
+    crowdFund = CrowdFund(_crowdFund);
+    return (crowdFund.isCrowdsaleFull());
+}
+
+function isGoalAchieved(address _crowdFund) constant returns(bool) {
+    crowdFund = CrowdFund(_crowdFund);
+    return (crowdFund.isMinimumGoalReached());
+}
+
+}

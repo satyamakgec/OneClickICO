@@ -4,7 +4,7 @@ import '../Token.sol';
 import '../generators/TokenGenerator.sol';
 import '../data/DataStore.sol';
 
-contract TokenHandler is TokenGenerator{
+contract TokenHandler is TokenGenerator {
 
 Token token;
 
