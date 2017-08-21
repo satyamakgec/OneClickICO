@@ -8,7 +8,7 @@ contract CrowdFundGenerators is DataStore {
     CrowdFund newCrowdFund;
 
     event PlatformAddressChange(uint256 _blockTimestamp, address _newAddress);
-    event CrowdFundGenerated(uint256 _blockTimeStamp , address indexed _owner);
+    event CrowdFundGenerated(uint256 _blockTimeStamp , address  _owner, address _crowdFundAddress);
 
     modifier onlyPlatform(){
         require(platform == msg.sender);
@@ -32,7 +32,7 @@ contract CrowdFundGenerators is DataStore {
      function generateCrowdFund(address _founderAddress , uint256 _startDate , uint256 _endDate ,address _tokenAddress , uint64 _tokenConversionRate, uint256 _minimumFundingGoal ) returns (bool){
          newCrowdFund = new CrowdFund(_founderAddress , _startDate , _endDate , _tokenAddress ,_tokenConversionRate, _minimumFundingGoal);
          CrowdFundCreators[_tokenAddress] = newCrowdFund;
-         CrowdFundGenerated(now ,msg.sender);
+         CrowdFundGenerated(now , msg.sender, newCrowdFund);
          return true;   
     }
 

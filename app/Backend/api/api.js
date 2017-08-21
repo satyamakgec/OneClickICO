@@ -15,6 +15,6 @@ module.exports = function(app,express){
    api.post('/setCrowdFundAddress',Token.setCrowdFundAddress);
    api.post('/distributeToken',Token.distributeTokens);
    api.post('/getbalance',Token.getBalance);
-   api.post('/createCrowdfund',Crowdfund.createCrowdfund);
+   api.post('/createCrowdFund',Crowdfund.createCrowdFund);
     return api;
 };
