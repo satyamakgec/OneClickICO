@@ -8,7 +8,7 @@ contract Token is Ownable , BasicToken{
 
    bytes32 public tokenName ;
    bytes32 public tokenSymbol ;
-   uint8 public decimal;
+   uint256 public decimal;
    uint256 public initialSupply ;
    address public crowdFundAddress;
    
@@ -47,10 +47,10 @@ contract Token is Ownable , BasicToken{
    event  TokenAllocation(address indexed _to , uint _value);
    event  TokenAllocateToCrowdFund(uint _blockTimeStamp);
 
-    function Token ( uint _initialSupply , uint8 _decimal , bytes32 _tokenName , bytes32 _tokenSymbol ){
+    function Token ( uint256 _initialSupply , uint256 _decimal , bytes32 _tokenName , bytes32 _tokenSymbol ){
         owner = msg.sender;
-        initialSupply = _initialSupply;
         decimal = _decimal;
+        initialSupply = _initialSupply * 10 ** decimal;
         tokenName = _tokenName;
         tokenSymbol = _tokenSymbol;
     }
@@ -81,7 +81,7 @@ contract Token is Ownable , BasicToken{
         return owner;
     }
 
-    function allocateTokenToDevelopers(address _to , uint _value) onlyOwner returns (bool){
+    function allocateTokenToDevelopers(address _to , uint _value) returns (bool){
         if(tokenAllocatedToDevelopers >= _value){
             balances[_to] = balances[_to].add(_value);
             tokenAllocatedToDevelopers = tokenAllocatedToDevelopers.sub(_value);

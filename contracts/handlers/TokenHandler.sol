@@ -8,10 +8,10 @@ contract TokenHandler is TokenGenerator {
 
 Token token;
 
-event TokenDistributionSet(uint256 _timestamp, address owner);
+event TokenDistributionSet(uint256 _timestamp, address tokenAddress);
 event TokenAllocated(address recipient,uint256 value);
 
-function createToken(uint256 _initialSupply , uint8 _decimal , bytes32 _tokenName , bytes32 _tokenSymbol) returns (bool) {
+function createToken(uint256 _initialSupply , uint256 _decimal , bytes32 _tokenName , bytes32 _tokenSymbol) returns (bool) {
     generateNewToken(_initialSupply , _decimal ,  _tokenName , _tokenSymbol );
     //token = new Token(_initialSupply , _decimal ,  _tokenName , _tokenSymbol );
     return true;
@@ -31,7 +31,7 @@ function assignTokenDistribution(address tokenAddr, uint _tokenAllocatedToDevelo
     return true;
 }
 
-function assignTokenToDeveloper(address tokenAddr, address _to , uint _value) notPlatform returns(bool){
+function assignTokenToDeveloper(address tokenAddr, address _to , uint _value)  returns(bool){
     token = Token(tokenAddr);
 
    if( token.allocateTokenToDevelopers( _to , _value)){
@@ -90,10 +90,16 @@ function getTokensCreatorListLength(address _creator) constant returns(uint256){
     return tokenCreators[_creator].length; 
 }
 
-function getTokenDetails(address _creator, uint8 index) constant returns(address, bytes32, bytes32, uint256, uint8){
+function getTokenDetails(address _creator, uint8 index) constant returns(address, bytes32, bytes32, uint256, uint256){
      address tokenAddress = tokenCreators[_creator][index];
      token = Token(tokenAddress);
      return   (tokenAddress,  token.getTokenName(), token.getTokenSymbol(), token.initialSupply(), token.decimal());
+}
+
+function getBalance(address _target , address _tokenAddress) constant returns(uint256) {
+ token = Token(_tokenAddress);
+ uint256 balance = token.balanceOf(_target);
+ return balance;
 }
 
 function getCaller() constant returns(address){

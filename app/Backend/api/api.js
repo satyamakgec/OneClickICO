@@ -1,5 +1,6 @@
 //var index = require('./index');
 var Token = require('../controllers/token_controller');
+var Crowdfund = require('../controllers/crowd_controller');
 module.exports = function(app,express){
    
     var api = express.Router();
@@ -13,5 +14,7 @@ module.exports = function(app,express){
    api.post('/tokenDistribution',Token.setTokenDistribution);
    api.post('/setCrowdFundAddress',Token.setCrowdFundAddress);
    api.post('/distributeToken',Token.distributeTokens);
+   api.post('/getbalance',Token.getBalance);
+   api.post('/createCrowdfund',Crowdfund.createCrowdfund);
     return api;
 };

@@ -39,7 +39,7 @@ contract TokenGenerator is DataStore{
         PlatformAddressChange(now , platform);
     }
 
-    function generateNewToken(uint256 _initialSupply , uint8 _decimal , bytes32 _tokenName , bytes32 _tokenSymbol )  returns (bool){
+    function generateNewToken(uint256 _initialSupply , uint256 _decimal , bytes32 _tokenName , bytes32 _tokenSymbol )  returns (bool){
          newToken  = new Token(_initialSupply , _decimal , _tokenName , _tokenSymbol);
          tokenCreators[msg.sender].push(newToken);
          TokenGenerated(now , msg.sender , _initialSupply , _tokenSymbol , _tokenName );

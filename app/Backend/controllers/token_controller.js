@@ -8,7 +8,7 @@ Web3 = new web3();
 Web3.setProvider( new web3.providers.HttpProvider("http://localhost:8545"));
 
 tokenHandlerInstance = Web3.eth.contract(TokenHandler.abi); 
-instance = tokenHandlerInstance.at('0x633e43273740255ecb3d76fdfccb049a562230d8');
+instance = tokenHandlerInstance.at('0x45a97f88ac00f3d41c0baf19a77942e40398a15d');
 //Web3.eth.defaultAccount = Web3.eth.accounts[0];
 var address = "0x9227c67a8704691ad416b5f4c0ca88139c9ab829";
 
@@ -110,9 +110,24 @@ module.exports.distributeTokens = function(req,res){
     var to = req.body.recipientAddress;
     var value = req.body.NumberOfTokens;
     var flag = req.body.flag; 
+    
+    console.log(req.body.flag);
 
     switch(flag){
-        case '1' : distributeTokenToDeveloper(tokenAddress,to,value).then(function(response){
+        case '1' : 
+        console.log(1);
+        distributeTokenToDeveloper(tokenAddress,to,value).then(function(response){
+                     
+                res.send(response);
+              
+        }).catch(function(err){
+              res.send(err);
+        });
+        break;
+        case '2' :
+        
+        console.log(2);
+        distributeTokenToFounder(tokenAddress,to,value).then(function(response){
               
                 res.send(response);
               
@@ -120,7 +135,10 @@ module.exports.distributeTokens = function(req,res){
               res.send(err);
         });
         break;
-        case '2' : distributeTokenToFounder(tokenAddress,to,value).then(function(response){
+        case '3' : 
+        
+        console.log(3);
+        distributeTokenToFutureStakeholder(tokenAddress,to,value).then(function(response){
               
                 res.send(response);
               
@@ -128,15 +146,10 @@ module.exports.distributeTokens = function(req,res){
               res.send(err);
         });
         break;
-        case '3' : distributeTokenToFutureStakeholder(tokenAddress,to,value).then(function(response){
-              
-                res.send(response);
-              
-        }).catch(function(err){
-              res.send(err);
-        });
-        break;
-        case '4' : distributeTokenToMarketMaker(tokenAddress,to,value).then(function(response){
+        case '4' : 
+        
+        console.log(4);
+        distributeTokenToMarketMaker(tokenAddress,to,value).then(function(response){
               
                 res.send(response);
               
@@ -145,27 +158,30 @@ module.exports.distributeTokens = function(req,res){
         });
         break;
         default :
+
+        console.log(5);
         res.send("This is invalid option!");
     }
 }
 
 function distributeTokenToDeveloper(tokenAddress,to,value){
- 
+    console.log("inside distributeTokenToDeveloper()");
     var deferred = Q.defer(); 
     var event = instance.TokenAllocated();
         event.watch(function(err,result){
         if(err){
-             console.log(err);
+             console.log("this is the err",err);
              deferred.reject(err);
         }else{
-             console.log(result);
+             console.log("this is the result",result);
              event.stopWatching();
              deferred.resolve(result);
         }
     });
-
-    
-   instance.assignTokenToDeveloper(tokenAddress,to,value,{from : address, gas : 4000000});
+   
+   var _value = new BigNumber(value).times(new BigNumber(10).pow(18));
+   instance.assignTokenToDeveloper(tokenAddress,to,_value,{from : address, gas : 4000000});
+   return deferred.promise;
 }
 
 function distributeTokenToFounder(tokenAddress,to,value){
@@ -183,8 +199,9 @@ function distributeTokenToFounder(tokenAddress,to,value){
         }
     });
 
-    
-   instance.assignTokenToFounder(tokenAddress,to,value,{from : address, gas : 4000000});
+   var _value = new BigNumber(value).times(new BigNumber(10).pow(18));    
+   instance.assignTokenToFounder(tokenAddress,to,_value,{from : address, gas : 4000000});
+    return deferred.promise;
 }
 
 function distributeTokenToFutureStakeholder(tokenAddress,to,value){
@@ -202,8 +219,9 @@ function distributeTokenToFutureStakeholder(tokenAddress,to,value){
         }
     });
 
-    
-   instance.assignTokenToFutureStakeHoler(tokenAddress,to,value,{from : address, gas : 4000000});
+   var _value = new BigNumber(value).times(new BigNumber(10).pow(18)); 
+   instance.assignTokenToFutureStakeHoler(tokenAddress,to,_value,{from : address, gas : 4000000});
+    return deferred.promise;
 }
 
 function distributeTokenToMarketMaker(tokenAddress,to,value){
@@ -222,6 +240,16 @@ function distributeTokenToMarketMaker(tokenAddress,to,value){
         }
     });
 
-    
-   instance.assignTokenToMarketMaker(tokenAddress,to,value,{from : address, gas : 4000000});
+    var _value = new BigNumber(value).times(new BigNumber(10).pow(18));
+   instance.assignTokenToMarketMaker(tokenAddress,to,_value,{from : address, gas : 4000000});
+    return deferred.promise;
+}
+
+
+module.exports.getBalance = function(req,res){
+    var target = req.body.target;
+    var tokenAddress = req.body.tokenAddress;
+
+    var balance = instance.getBalance(target,tokenAddress);
+        res.send(balance);
 }
