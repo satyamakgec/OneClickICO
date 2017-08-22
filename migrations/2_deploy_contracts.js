@@ -3,8 +3,19 @@
 var crowdFundHandler =  artifacts.require("./handlers/CrowdFundHandler.sol");
 var tokenHandler =  artifacts.require("./handlers/TokenHandler.sol");
 var dataStore =  artifacts.require("./data/DataStore.sol");
+
 module.exports = function(deployer) {
-  deployer.deploy(tokenHandler);
-  deployer.deploy(crowdFundHandler);
-  deployer.depoly(dataStore);
+
+  deployer.deploy(dataStore).then(function(){
+      console.log(dataStore.address);
+      var addr = dataStore.address;
+         deployer.deploy(tokenHandler,addr).then(function(){
+               return deployer.deploy(crowdFundHandler,addr).then(function(){  
+                });
+         });
+  });
+  
+ 
 };
+
+ 

@@ -6,10 +6,10 @@ var Q = require("q");
 var Connection = require("./../config/connection");
 //console.log(Connection.data.tokenInstance);
 var Instance = Connection.data.tokenInstance;
-console.log(Instance);
+//console.log("Instance",Instance);
 var Web3 = Connection.Web3;
 //Web3.eth.defaultAccount = Web3.eth.accounts[0];
-var address = "0x9227c67a8704691ad416b5f4c0ca88139c9ab829";
+var address = "0xe8dc90ecd0cffd6b5ed446cd8276bfff133ce264";
 
 module.exports.getCoinbase = function (req,res){
 Web3.eth.getCoinbase(function(err,coinbase){
@@ -26,14 +26,14 @@ module.exports.getAllTokens = function(req,res){
   //Web3.setProvider(req.web3.currentprovider());
   var temp = [];
    var length = Instance.getTokensCreatorListLength(address,{from:address});
-               console.log(length);
+               console.log("length",length);
                 var array = [];
                 len = length.toNumber();
                 for(var i=0; i<=len-1; i++) {
                 array.push(i);
                 }
                 asyncLoop(array,0,array.length - 1,function(index,next){
-                    console.log(index);
+                    console.log("index",index);
                      var data = Instance.getTokenDetails(address,index,{from:address});
                             temp.push(data);
                             console.log(data);

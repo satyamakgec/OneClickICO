@@ -3,15 +3,19 @@ pragma solidity ^0.4.11;
 import '../CrowdFund.sol';
 import '../data/DataStore.sol';
 
-contract CrowdFundGenerators is DataStore {
+contract CrowdFundGenerators {
 
     CrowdFund newCrowdFund;
-
+    DataStore dataStore;
+    address dataStoreAddress;
+    
     event PlatformAddressChange(uint256 _blockTimestamp, address _newAddress);
-    event CrowdFundGenerated(uint256 _blockTimeStamp , address  _owner, address _crowdFundAddress);
+    event CrowdFundGenerated(uint256 _blockTimeStamp , address  _owner, address _crowdfundAddress);
+    event Created(address);
 
     modifier onlyPlatform(){
-        require(platform == msg.sender);
+        
+        require(dataStore.platform() == msg.sender);
         _;
     }
 
@@ -21,17 +25,19 @@ contract CrowdFundGenerators is DataStore {
     }
     
     modifier notPlatform(){
-        require(msg.sender != platform);
+        require(msg.sender != dataStore.platform());
         _;
     }
 
-    function CrowdFundGenerators(){
-        platform = msg.sender;
+    function CrowdFundGenerators(address _dataStoreAddress){
+        dataStoreAddress = _dataStoreAddress;
+        dataStore = DataStore(_dataStoreAddress); 
     }
 
-     function generateCrowdFund(address _founderAddress , uint256 _startDate , uint256 _endDate ,address _tokenAddress , uint64 _tokenConversionRate, uint256 _minimumFundingGoal ) returns (bool){
+     function generateCrowdFund(address _dataStoreAddress, address _founderAddress , uint256 _startDate , uint256 _endDate ,address _tokenAddress , uint64 _tokenConversionRate, uint256 _minimumFundingGoal ) returns (bool){
          newCrowdFund = new CrowdFund(_founderAddress , _startDate , _endDate , _tokenAddress ,_tokenConversionRate, _minimumFundingGoal);
-         CrowdFundCreators[_tokenAddress] = newCrowdFund;
+         dataStore = DataStore(_dataStoreAddress);
+         dataStore.pushToCrowdFundCreators(_tokenAddress,newCrowdFund);
          CrowdFundGenerated(now , msg.sender, newCrowdFund);
          return true;   
     }

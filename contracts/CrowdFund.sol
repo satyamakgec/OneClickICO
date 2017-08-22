@@ -4,7 +4,8 @@ import './Token.sol';
 import './lib/safeMath.sol';
 
 
-contract CrowdFund{
+contract CrowdFund {
+    
     
 
     using SafeMath for uint256;
@@ -147,3 +148,5 @@ contract CrowdFund{
     }
 
 }
+
+

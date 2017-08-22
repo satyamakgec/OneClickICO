@@ -4,7 +4,7 @@ import './helpers/Ownable.sol';
 import './lib/safeMath.sol';
 import './helpers/BasicToken.sol';
 
-contract Token is Ownable , BasicToken{
+contract Token is Ownable , BasicToken {
 
    bytes32 public tokenName ;
    bytes32 public tokenSymbol ;
@@ -62,7 +62,8 @@ contract Token is Ownable , BasicToken{
         return tokenSymbol;
     }
     
-    function setCrowdFundAddress(address _crowdFund) onlyOwner isCrowdFund nonZeroAddress(_crowdFund) external{  // call one Time
+
+    function setCrowdFundAddress(address _crowdFund) {  // call one Time
         crowdFundAddress = _crowdFund;
         isCrowdFundAddressSet = !isCrowdFundAddressSet;
     }

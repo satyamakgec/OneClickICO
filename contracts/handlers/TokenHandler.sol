@@ -10,7 +10,12 @@ Token token;
 
 event TokenDistributionSet(uint256 _timestamp, address tokenAddress);
 event TokenAllocated(address recipient,uint256 value);
-event CrowdFundAddressSet(bool);  
+event CrowdFundAddressSet(address, bool);
+
+function TokenHandler(address _dataStoreAddress) TokenGenerator(_dataStoreAddress){
+    
+}
+
 
 function createToken(uint256 _initialSupply , uint256 _decimal , bytes32 _tokenName , bytes32 _tokenSymbol) returns (bool) {
     generateNewToken(_initialSupply , _decimal ,  _tokenName , _tokenSymbol );
@@ -18,14 +23,15 @@ function createToken(uint256 _initialSupply , uint256 _decimal , bytes32 _tokenN
     return true;
 }
 
-function assignCrowdFundAddress(address tokenAddr) notPlatform {
+function assignCrowdFundAddress(address tokenAddr) returns(uint){
+    
     token = Token(tokenAddr);
-    address _crowdFund = CrowdFundCreators[tokenAddr];
-    if(_crowdFund == 0)
-    throw;
-    token.setCrowdFundAddress(_crowdFund);
-    CrowdFundAddressSet(true);
-
+    address crowdFundAddr= getCrowdFundAddress(tokenAddr);
+    CrowdFundAddressSet(crowdFundAddr,true);
+    if(crowdFundAddr == 0)
+    return 0;
+    token.setCrowdFundAddress(crowdFundAddr);
+    return 1;
 
 }
 
@@ -92,11 +98,12 @@ function assignTokenToCrowdFund(address tokenAddr) notPlatform returns(bool){
 }
 
 function getTokensCreatorListLength(address _creator) constant returns(uint256){
-    return tokenCreators[_creator].length; 
+    var length = getLengthOfTokenCreators(_creator);
+    return length;
 }
 
 function getTokenDetails(address _creator, uint8 index) constant returns(address, bytes32, bytes32, uint256, uint256){
-     address tokenAddress = tokenCreators[_creator][index];
+     address tokenAddress = gettokenAddress(_creator,index);
      token = Token(tokenAddress);
      return   (tokenAddress,  token.getTokenName(), token.getTokenSymbol(), token.initialSupply(), token.decimal());
 }

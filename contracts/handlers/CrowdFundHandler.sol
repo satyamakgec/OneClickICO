@@ -6,13 +6,14 @@ import '../generators/CrowdFundGenerators.sol';
 contract CrowdFundHandler is CrowdFundGenerators {
 
     CrowdFund crowdFund;
-
-   function CrowdFundHandler() {
-       platform = msg.sender;
+  
+    
+   function CrowdFundHandler(address _dataStoreAddress) CrowdFundGenerators(_dataStoreAddress) {
+     
    }
 
 function createCrowdFund(address _founderAddress, uint256 _startDate, uint256 _endDate, address _tokenAddress, uint64 _tokenConversionRate, uint256 _minimumFundingGoal ) returns (bool) {
-    generateCrowdFund(_founderAddress, _startDate, _endDate, _tokenAddress, _tokenConversionRate, _minimumFundingGoal);
+    generateCrowdFund(dataStoreAddress,_founderAddress, _startDate, _endDate, _tokenAddress, _tokenConversionRate, _minimumFundingGoal);
     return true;
 }
 
