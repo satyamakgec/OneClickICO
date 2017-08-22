@@ -5,7 +5,7 @@ var BigNumber = require("bignumber.js");
 var Q = require("q");
 
 var Connection = require("./../config/connection");
-var Instance = Connection.crowdInstance;
+var Instance = Connection.data.crowdInstance;
 var Web3 = Connection.Web3;
 
 var address = "0x9227c67a8704691ad416b5f4c0ca88139c9ab829";
